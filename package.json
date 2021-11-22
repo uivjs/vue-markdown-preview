@@ -8,6 +8,7 @@
     "build": "lerna exec \"tsbb build --use-vue\" --scope @uivjs/*",
     "watch": "lerna exec \"tsbb watch --use-vue\" --scope @uivjs/vue-markdown-preview",
     "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
+    "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
     "clean": "lerna clean --yes",
     "hoist": "lerna bootstrap --hoist",
     "bootstrap": "lerna bootstrap --force-local --no-ci"
