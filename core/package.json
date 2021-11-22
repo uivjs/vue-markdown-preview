@@ -1,0 +1,31 @@
+{
+  "name": "@uivjs/vue-markdown-preview",
+  "version": "0.0.1",
+  "description": "Vue component preview markdown text in web browser. The minimal amount of CSS to replicate the GitHub Markdown style.",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "esm",
+    "dist.css"
+  ],
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "devDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {
+    "@mapbox/rehype-prism": "0.8.0",
+    "rehype-slug": "5.0.0",
+    "rehype-autolink-headings": "6.1.0",
+    "rehype-stringify": "9.0.2",
+    "remark-gfm": "3.0.1",
+    "rehype-raw": "6.1.0",
+    "rehype-rewrite": "3.0.4",
+    "remark-parse": "10.0.1",
+    "remark-rehype": "10.0.1",
+    "unified": "10.1.1"
+  }
+}

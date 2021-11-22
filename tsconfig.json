@@ -20,5 +20,5 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true
   },
-  "exclude": ["website", "packages/*/cjs", "packages/*/esm"]
+  "exclude": ["website", "core/cjs", "core/esm"]
 }
