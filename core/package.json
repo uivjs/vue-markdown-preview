@@ -1,6 +1,6 @@
 {
   "name": "@uivjs/vue-markdown-preview",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vue component preview markdown text in web browser. The minimal amount of CSS to replicate the GitHub Markdown style.",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
