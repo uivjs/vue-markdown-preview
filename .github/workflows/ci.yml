@@ -26,7 +26,7 @@ jobs:
         uses: jaywcjlove/create-tag-action@v1.3.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          package-path: ./packages/base/package.json
+          package-path: ./core/package.json
 
       - name: Generate Changelog
         id: changelog
@@ -41,7 +41,7 @@ jobs:
       - name: Create Release
         uses: jaywcjlove/create-tag-action@v1.3.4
         with:
-          package-path: ./packages/base/package.json
+          package-path: ./core/package.json
           release: true
           body: |
             ${{ steps.changelog.outputs.compareurl }}
