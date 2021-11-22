@@ -1,0 +1,14 @@
+{
+  "name": "@vue-simple-package/simple",
+  "version": "1.0.0",
+  "description": "simple package.",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  },
+  "devDependencies": {
+    "vue": "^3.0.0"
+  }
+}

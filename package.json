@@ -1,0 +1,25 @@
+{
+  "name": "vue-simple-package",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "start": "lerna exec \"npm run serve\" --scope website",
+    "build:website": "lerna exec \"npm run build\" --scope website",
+    "build": "lerna exec \"tsbb build --use-vue\" --scope @vue-simple-package/*",
+    "watch:simple": "lerna exec \"tsbb watch --use-vue\" --scope @vue-simple-package/simple",
+    "watch:base": "lerna exec \"tsbb watch --use-vue\" --scope @vue-simple-package/base",
+    "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
+    "clean": "lerna clean --yes",
+    "hoist": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --force-local --no-ci"
+  },
+  "author": "jaywcjlove",
+  "license": "MIT",
+  "devDependencies": {
+    "husky": "7.0.4",
+    "prettier": "2.4.1",
+    "pretty-quick": "3.1.2",
+    "lerna": "4.0.0",
+    "tsbb": "^3.5.0"
+  }
+}
