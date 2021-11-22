@@ -1,6 +1,11 @@
 @uivjs/vue-markdown-preview
 ===
 
+[![Build & Deploy](https://github.com/uiwjs/react-markdown-preview/actions/workflows/pr.yml/badge.svg)](https://github.com/uiwjs/react-markdown-preview/actions/workflows/pr.yml)
+[![Downloads](https://img.shields.io/npm/dm/@uivjs/vue-markdown-preview.svg?style=flat)](https://www.npmjs.com/package/@uivjs/vue-markdown-preview)
+[![npm version](https://img.shields.io/npm/v/@uivjs/vue-markdown-preview.svg)](https://www.npmjs.com/package/@uivjs/vue-markdown-preview)
+[![npm unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@uivjs/vue-markdown-preview/file/README.md)
+
 Vue component preview markdown text in web browser. The minimal amount of CSS to replicate the GitHub Markdown style. The current document website is converted using this Vue component.
 
 ## Install

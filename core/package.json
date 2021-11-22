@@ -6,9 +6,9 @@
   "module": "./esm/index.js",
   "license": "MIT",
   "files": [
-    "lib",
+    "cjs",
     "esm",
-    "dist.css"
+    "markdown.css"
   ],
   "peerDependencies": {
     "vue": ">=3.0.0"
