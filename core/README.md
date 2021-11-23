@@ -1,7 +1,7 @@
 @uivjs/vue-markdown-preview
 ===
 
-[![Build & Deploy](https://github.com/uiwjs/react-markdown-preview/actions/workflows/pr.yml/badge.svg)](https://github.com/uiwjs/react-markdown-preview/actions/workflows/pr.yml)
+[![Build & Deploy](https://github.com/uivjs/vue-markdown-preview/actions/workflows/ci.yml/badge.svg)](https://github.com/uivjs/vue-markdown-preview/actions/workflows/ci.yml)
 [![Downloads](https://img.shields.io/npm/dm/@uivjs/vue-markdown-preview.svg?style=flat)](https://www.npmjs.com/package/@uivjs/vue-markdown-preview)
 [![npm version](https://img.shields.io/npm/v/@uivjs/vue-markdown-preview.svg)](https://www.npmjs.com/package/@uivjs/vue-markdown-preview)
 [![npm unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@uivjs/vue-markdown-preview/file/README.md)
