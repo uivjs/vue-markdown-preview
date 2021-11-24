@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType } from 'vue';
+import { defineComponent, h, PropType, ExtractPropTypes } from 'vue';
 import { unified, PluggableList } from 'unified';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
@@ -12,22 +12,27 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { octiconLink } from './octiconLink';
 
+const markdownPreview = {
+  rehypePlugins: {
+    type: Object as PropType<PluggableList>,
+    default: [],
+  },
+  remarkPlugins: {
+    type: Object as PropType<PluggableList>,
+    default: [],
+  },
+  source: {
+    default: '',
+    type: String,
+  },
+};
+
+type ExtractPublicPropTypes<T> = Omit<Partial<ExtractPropTypes<T>>, Extract<keyof T, `internal${string}`>>;
+
+export type MarkdownPreviewProps = ExtractPublicPropTypes<typeof markdownPreview>;
 export default defineComponent({
   name: 'MarkdownPreview',
-  props: {
-    rehypePlugins: {
-      type: Object as PropType<PluggableList>,
-      default: [],
-    },
-    remarkPlugins: {
-      type: Object as PropType<PluggableList>,
-      default: [],
-    },
-    source: {
-      default: '',
-      type: String,
-    },
-  },
+  props: markdownPreview,
   setup(props) {
     const { remarkPlugins, rehypePlugins } = props;
     function createHTML(str: string) {
