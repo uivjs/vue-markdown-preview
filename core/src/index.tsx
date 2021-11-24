@@ -2,6 +2,7 @@ import { defineComponent, h, PropType, ExtractPropTypes } from 'vue';
 import { unified, PluggableList } from 'unified';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
+import rehypeAttrs from 'rehype-attr';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
@@ -41,6 +42,7 @@ export default defineComponent({
         .use(remarkGfm)
         .use(remarkPlugins || [])
         .use(remarkRehype, { allowDangerousHtml: true })
+        .use(rehypeAttrs, { properties: 'attr' })
         .use(rehypeRaw)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings)
