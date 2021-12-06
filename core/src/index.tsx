@@ -92,7 +92,6 @@ export default defineComponent({
       if (hastNode.type !== 'root') {
         throw new TypeError('Expected a `root` node');
       }
-      console.log('hastNode:', hastNode);
       let result = h(Fragment, {}, childrenToReact(hastNode.children));
       return <div class="markdown-body">{result}</div>;
     };

@@ -18,9 +18,6 @@ export function copyElement(str: string = ''): Element {
       class: 'copied',
     },
     children: [
-      // @ts-ignore
-      // h('div', {}, 'Some title'),
-      // dom,
       {
         type: 'element',
         tagName: 'svg',
