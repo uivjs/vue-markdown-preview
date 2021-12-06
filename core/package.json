@@ -31,6 +31,7 @@
   ],
   "dependencies": {
     "@mapbox/rehype-prism": "0.8.0",
+    "@uiw/copy-to-clipboard": "1.0.12",
     "rehype-attr": "2.0.6",
     "rehype-autolink-headings": "6.1.0",
     "rehype-raw": "6.1.0",

@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, ExtractPropTypes } from 'vue';
+import { defineComponent, h, PropType, ExtractPropTypes, Fragment } from 'vue';
 import { unified, PluggableList } from 'unified';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
@@ -8,10 +8,13 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypeRewrite from 'rehype-rewrite';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import stringify from 'rehype-stringify';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import { octiconLink } from './octiconLink';
+import { ElementContent, Root, Element } from 'hast';
+import { VFile } from 'vfile';
+import { octiconLink } from './nodes/octiconLink';
+import { copyElement } from './nodes/copyElement';
+import { childrenToReact } from './utils/ast-to-vue';
 
 const markdownPreview = {
   rehypePlugins: {
@@ -30,13 +33,24 @@ const markdownPreview = {
 
 type ExtractPublicPropTypes<T> = Omit<Partial<ExtractPropTypes<T>>, Extract<keyof T, `internal${string}`>>;
 
+const getCodeStr = (data: ElementContent[] = [], code: string = '') => {
+  data.forEach((node) => {
+    if (node.type === 'text') {
+      code += node.value;
+    } else if (node.type === 'element' && node.children && Array.isArray(node.children)) {
+      code += getCodeStr(node.children);
+    }
+  });
+  return code;
+};
+
 export type MarkdownPreviewProps = ExtractPublicPropTypes<typeof markdownPreview>;
 export default defineComponent({
   name: 'MarkdownPreview',
   props: markdownPreview,
   setup(props) {
     const { remarkPlugins, rehypePlugins } = props;
-    function createHTML(str: string) {
+    function processor() {
       return unified()
         .use(remarkParse)
         .use(remarkGfm)
@@ -62,15 +76,25 @@ export default defineComponent({
                 child.children = [octiconLink()];
               }
             }
+            if (node.type === 'element' && node.tagName === 'pre') {
+              const code = getCodeStr(node.children);
+              node.children.push(copyElement(code));
+            }
           },
         })
-        .use(rehypePlugins || [])
-        .use(stringify)
-        .processSync(str)
-        .toString();
+        .use(rehypePlugins || []);
     }
     return () => {
-      return <div class="markdown-body" innerHTML={createHTML(props.source || '')}></div>;
+      const file = new VFile();
+      file.value = props.source;
+      const prc = processor();
+      const hastNode = prc.runSync(prc.parse(file), file) as unknown as Element | Root;
+      if (hastNode.type !== 'root') {
+        throw new TypeError('Expected a `root` node');
+      }
+      console.log('hastNode:', hastNode);
+      let result = h(Fragment, {}, childrenToReact(hastNode.children));
+      return <div class="markdown-body">{result}</div>;
     };
   },
 });

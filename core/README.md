@@ -57,6 +57,21 @@ export default defineComponent({
 
 - [react-markdown-preview](https://github.com/uiwjs/react-markdown-preview) React component preview markdown text in web browser. 
 
+## Development
+
+```bash
+npm install       # Installation dependencies
+npm run bootstrap # Install dependencies in sub-packages
+```
+
+```bash
+npm run build     # Compile package
+# listen to the component compile and output the .js file
+# listen for compilation output type .d.ts file
+npm run watch     # Monitor the compiled package `@uivjs/vue-markdown-preview`
+npm run start     # development mode, listen to compile preview website instance
+```
+
 ## License
 
 Licensed under the MIT License.

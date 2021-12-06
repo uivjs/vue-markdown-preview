@@ -1,7 +1,8 @@
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  margin: 0 auto 0 auto;
+  max-width: 960px;
+  margin: 28px auto 60px auto;
   padding: 8px;
   color: #24292f;
   background-color: #ffffff;
@@ -16,6 +17,57 @@
   display: inline-block;
   fill: currentColor;
   vertical-align: text-bottom;
+}
+
+.markdown-body pre {
+  position: relative;
+}
+.markdown-body pre .copied {
+  visibility: hidden;
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+  color: #a5afbb;
+  top: 6px;
+  right: 6px;
+  border-radius: 5px;
+  background: #e3e3e3;
+  padding: 6px;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+.markdown-body pre .copied::before {
+  content: ' ';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.markdown-body pre:hover .copied {
+  visibility: visible;
+}
+.markdown-body pre:hover .copied:hover {
+  background: #4caf50;
+  color: #fff;
+}
+.markdown-body pre:hover .copied:active,
+.markdown-body pre .active {
+  background: #2e9b33;
+  color: #fff;
+}
+
+.markdown-body pre .copied .octicon-copy {
+  display: block;
+}
+.markdown-body pre .copied .octicon-check {
+  display: none;
+}
+.markdown-body pre .active .octicon-copy {
+  display: none;
+}
+.markdown-body pre .active .octicon-check {
+  display: block;
 }
 
 .markdown-body .octicon-video {
@@ -384,7 +436,6 @@
   margin-top: 0;
   margin-bottom: 0;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-  font-size: 12px;
   word-wrap: normal;
 }
 
@@ -724,8 +775,7 @@
   word-break: normal;
 }
 
-.markdown-body .highlight pre,
-.markdown-body pre {
+.markdown-body pre code {
   padding: 16px;
   overflow: auto;
   font-size: 85%;
@@ -736,14 +786,9 @@
 
 .markdown-body pre code,
 .markdown-body pre tt {
-  display: inline;
-  max-width: auto;
-  padding: 0;
+  display: block;
   margin: 0;
-  overflow: visible;
-  line-height: inherit;
   word-wrap: normal;
-  background-color: transparent;
   border: 0;
 }
 

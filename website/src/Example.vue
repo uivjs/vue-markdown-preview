@@ -1,5 +1,6 @@
 <template>
   <div class="example">
+    <github-corners fixed target="__blank" href="https://github.com/uivjs/vue-markdown-preview" />
     <textarea v-model="message" placeholder="Please enter the Markdown code!"></textarea>
     <markdown-preview :source="message" class="markdown">{{ message }}</markdown-preview>
   </div>
@@ -8,6 +9,7 @@
 <script>
 import { defineComponent } from 'vue';
 import MarkdownPreview from '@uivjs/vue-markdown-preview';
+import GithubCorners from '@uivjs/vue-github-corners';
 
 export default defineComponent({
   data() {
@@ -16,6 +18,7 @@ export default defineComponent({
     };
   },
   components: {
+    GithubCorners,
     MarkdownPreview,
   },
 });
