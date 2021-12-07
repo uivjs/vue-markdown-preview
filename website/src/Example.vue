@@ -2,7 +2,7 @@
   <div class="example">
     <github-corners fixed target="__blank" href="https://github.com/uivjs/vue-markdown-preview" />
     <textarea v-model="message" placeholder="Please enter the Markdown code!"></textarea>
-    <markdown-preview :source="message" class="markdown">{{ message }}</markdown-preview>
+    <markdown-preview :source="message" class="markdown" />
   </div>
 </template>
 

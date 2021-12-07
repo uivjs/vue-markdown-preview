@@ -9,7 +9,6 @@
     <markdown-preview class="markdown">
       {{ markdown }}
     </markdown-preview>
-    <!-- <markdown-preview :source="markdown" class="markdown" /> -->
   </div>
 </template>
 <script>

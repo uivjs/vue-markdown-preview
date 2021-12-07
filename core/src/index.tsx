@@ -93,7 +93,7 @@ export default defineComponent({
               .map((item) => item.children)
           : [];
       const file = new VFile();
-      file.value = children ? children.join() : props.source;
+      file.value = children && children.length > 0 ? children.join() : props.source;
       const prc = processor();
       const hastNode = prc.runSync(prc.parse(file), file) as unknown as Element | Root;
       if (hastNode.type !== 'root') {
