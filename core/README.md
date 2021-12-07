@@ -6,7 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/@uivjs/vue-markdown-preview.svg)](https://www.npmjs.com/package/@uivjs/vue-markdown-preview)
 [![npm unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/@uivjs/vue-markdown-preview/file/README.md)
 
-Vue component preview markdown text in web browser. The minimal amount of CSS to replicate the GitHub Markdown style. The current document website is converted using this Vue component.
+Markdown component for Vue. The minimal amount of CSS to replicate the GitHub Markdown style. The current document website is converted using this Vue component.
 
 ## Install
 
@@ -19,7 +19,13 @@ npm i @uivjs/vue-markdown-preview
 ```vue
 <template>
   <div>
-    <markdown-preview :source="markdown"></markdown-preview>
+    <markdown-preview :source="markdown" />
+    <markdown-preview class="markdown-warpper">
+      {{markdown}}
+    </markdown-preview>
+    <markdown-preview class="markdown-warpper">
+      ## Hello Markdown
+    </markdown-preview>
   </div>
 </template>
 
@@ -53,10 +59,6 @@ export default defineComponent({
 - `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
 - `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
 
-## Related
-
-- [react-markdown-preview](https://github.com/uiwjs/react-markdown-preview) React component preview markdown text in web browser. 
-
 ## Development
 
 ```bash
@@ -71,6 +73,10 @@ npm run build     # Compile package
 npm run watch     # Monitor the compiled package `@uivjs/vue-markdown-preview`
 npm run start     # development mode, listen to compile preview website instance
 ```
+
+## Related
+
+- [react-markdown-preview](https://github.com/uiwjs/react-markdown-preview) React component preview markdown text in web browser. 
 
 ## License
 

@@ -1,7 +1,7 @@
 {
   "name": "@uivjs/vue-markdown-preview",
   "version": "0.1.0",
-  "description": "Vue component preview markdown text in web browser. The minimal amount of CSS to replicate the GitHub Markdown style.",
+  "description": "Markdown component for Vue. The minimal amount of CSS to replicate the GitHub Markdown style.",
   "author": "kenny wang <wowohoo@qq.com>",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -24,10 +24,13 @@
   },
   "keywords": [
     "vue",
-    "markdown",
-    "markdown-preview",
+    "vue3",
+    "vue-component",
     "vue-markdown",
-    "vue3"
+    "css",
+    "markdown",
+    "markdown-css",
+    "markdown-preview"
   ],
   "dependencies": {
     "@mapbox/rehype-prism": "0.8.0",

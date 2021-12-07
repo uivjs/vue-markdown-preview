@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, ExtractPropTypes, Fragment } from 'vue';
+import { defineComponent, h, PropType, ExtractPropTypes, Fragment, Text } from 'vue';
 import { unified, PluggableList } from 'unified';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
@@ -48,7 +48,7 @@ export type MarkdownPreviewProps = ExtractPublicPropTypes<typeof markdownPreview
 export default defineComponent({
   name: 'MarkdownPreview',
   props: markdownPreview,
-  setup(props) {
+  setup(props, { slots }) {
     const { remarkPlugins, rehypePlugins } = props;
     function processor() {
       return unified()
@@ -85,8 +85,15 @@ export default defineComponent({
         .use(rehypePlugins || []);
     }
     return () => {
+      const children =
+        slots && slots.default
+          ? slots
+              .default()
+              .filter((item) => item.type === Text)
+              .map((item) => item.children)
+          : [];
       const file = new VFile();
-      file.value = props.source;
+      file.value = children ? children.join() : props.source;
       const prc = processor();
       const hastNode = prc.runSync(prc.parse(file), file) as unknown as Element | Root;
       if (hastNode.type !== 'root') {

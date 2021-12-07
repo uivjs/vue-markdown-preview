@@ -6,7 +6,10 @@
       <p>{{ description }}</p>
     </header>
     <example-base></example-base>
-    <markdown-preview :source="markdown" class="markdown"></markdown-preview>
+    <markdown-preview class="markdown">
+      {{ markdown }}
+    </markdown-preview>
+    <!-- <markdown-preview :source="markdown" class="markdown" /> -->
   </div>
 </template>
 <script>
