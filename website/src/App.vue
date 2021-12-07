@@ -2,7 +2,7 @@
   <div>
     <header>
       <img alt="Vue logo" src="./assets/logo.png" />
-      <a href="https://github.com/ui-vue/vue-markdown-preview" target="__blank">Vue Markdown Preview</a>
+      <a href="https://github.com/uivjs/vue-markdown-preview" target="__blank">Vue Markdown Preview</a>
       <p>{{ description }}</p>
     </header>
     <example-base></example-base>
