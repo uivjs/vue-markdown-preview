@@ -23,7 +23,7 @@ npm i @uivjs/vue-markdown-preview
     <markdown-preview class="markdown-warpper">
       {{markdown}}
     </markdown-preview>
-    <markdown-preview class="markdown-warpper">
+    <markdown-preview>
       ## Hello Markdown
     </markdown-preview>
   </div>
@@ -53,9 +53,136 @@ export default defineComponent({
 </script>
 ```
 
+## Examples
+
+### Use a plugin
+
+This example shows how to use a remark plugin. In this case, [remark-gfm](https://github.com/remarkjs/remark-gfm), which adds support for strikethrough, tables, tasklists and URLs directly:
+
+```vue
+<template>
+  <markdown-preview :remarkPlugins="remarkPlugins">
+    {{markdown}}
+  </markdown-preview>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+import MarkdownPreview from '@uivjs/vue-markdown-preview';
+import '@uivjs/vue-markdown-preview/markdown.css';
+import remarkGfm from 'remark-gfm';
+
+const markdown = `A paragraph with *emphasis* and **strong importance**.
+
+> A block quote with ~strikethrough~ and a URL: https://vuejs.org.
+
+* Lists
+* [ ] todo
+* [x] done
+
+A table:
+
+| a | b |
+| - | - |
+`;
+
+export default defineComponent({
+  data() {
+    return {
+      markdown,
+      remarkPlugins: [remarkGfm]
+    }
+  },
+  components: {
+    MarkdownPreview
+  }
+});
+</script>
+```
+
+### Use a plugin with options
+
+This example shows how to use a plugin and give it options. To do that, use an array with the plugin at the first place, and the options second. [remark-gfm](https://github.com/remarkjs/remark-gfm) has an option to allow only double tildes for strikethrough:
+
+```vue
+<template>
+  <markdown-preview :remarkPlugins="remarkPlugins">
+    This ~is not~ strikethrough, but ~~this is~~!
+  </markdown-preview>
+</template>
+
+<script>
+import MarkdownPreview from '@uivjs/vue-markdown-preview';
+import '@uivjs/vue-markdown-preview/markdown.css';
+import remarkGfm from 'remark-gfm';
+
+export default {
+  data() {
+    return {
+      remarkPlugins: [[remarkGfm, { singleTilde: false }]]
+    }
+  },
+  components: {
+    MarkdownPreview
+  }
+};
+</script>
+```
+
+## Components
+
+You can also change the things that come from markdown:
+
+```vue
+<template>
+  <markdown-preview :components="components">
+    {{`<em>www</em>`}}
+  </markdown-preview>
+</template>
+
+<script>
+import MarkdownPreview from '@uivjs/vue-markdown-preview';
+import '@uivjs/vue-markdown-preview/markdown.css';
+
+export default {
+  data() {
+    return {
+      components: {
+        em: ({ properties }) => <i style={{ color: 'red' }} {...properties}>ww</i>,
+      }
+    }
+  },
+  components: {
+    MarkdownPreview
+  }
+};
+</script>
+```
+
+## Plugins
+
+We use [unified](https://github.com/unifiedjs/unified), specifically [remark](https://github.com/remarkjs/remark) for markdown and [rehype](https://github.com/rehypejs/rehype) for HTML, which are tools to transform content with plugins. Here are three good ways to find plugins:
+
+- [awesome-remark](https://github.com/remarkjs/awesome-remark) and [awesome-rehype](https://github.com/rehypejs/awesome-rehype) — selection of the most awesome projects
+- List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) and list of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) — list of all plugins
+- [remark-plugin](https://github.com/topics/remark-plugin) and [rehype-plugin](https://github.com/topics/rehype-plugin) topics — any tagged repo on GitHub
+
+## Syntax
+
+`vue-markdown-preview` follows CommonMark, which standardizes the differences between markdown implementations, by default. Some syntax extensions are supported through plugins.
+
+We use [`micromark`](https://github.com/micromark/micromark) under the hood for our parsing. See its documentation for more information on markdown, CommonMark, and extensions.
+
+## Security
+
+Use of `vue-markdown-preview` is secure by default. Furthermore, the `remarkPlugins`, `rehypePlugins`, and components you use may be insecure.
+
+To make sure the content is completely safe, even after what plugins do, use [`rehype-sanitize`](https://github.com/rehypejs/rehype-sanitize). It lets you define your own schema of what is and isn’t allowed.
+
 ## API
 
-- `source` (`string`, default: `''`) Markdown to parse
+- `source` (`string`, default: `''`) Markdown to parse.
+- `components` (`Object.<string, VNodeChild>`, default: `{}`) Object mapping tag names to [`Vue`](https://vuejs.org) components.
 - `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
 - `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
 

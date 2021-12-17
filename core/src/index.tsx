@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, ExtractPropTypes, Fragment, Text } from 'vue';
+import { defineComponent, h, PropType, ExtractPropTypes, Fragment, Text, VNode } from 'vue';
 import { unified, PluggableList } from 'unified';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
@@ -14,7 +14,7 @@ import { ElementContent, Root, Element } from 'hast';
 import { VFile } from 'vfile';
 import { octiconLink } from './nodes/octiconLink';
 import { copyElement } from './nodes/copyElement';
-import { childrenToReact } from './utils/ast-to-vue';
+import { childrenToVue, Components } from './utils/ast-to-vue';
 
 const markdownPreview = {
   rehypePlugins: {
@@ -25,9 +25,13 @@ const markdownPreview = {
     type: Object as PropType<PluggableList>,
     default: [],
   },
+  components: {
+    type: Object as PropType<Components>,
+    default: {},
+  },
   source: {
-    default: '',
     type: String,
+    default: '',
   },
 };
 
@@ -99,7 +103,7 @@ export default defineComponent({
       if (hastNode.type !== 'root') {
         throw new TypeError('Expected a `root` node');
       }
-      let result = h(Fragment, {}, childrenToReact(hastNode.children));
+      let result = h(Fragment, {}, childrenToVue(hastNode.children, { components: props.components }));
       return <div class="markdown-body">{result}</div>;
     };
   },

@@ -7,11 +7,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
 import MarkdownPreview from '@uivjs/vue-markdown-preview';
 import GithubCorners from '@uivjs/vue-github-corners';
 
-export default defineComponent({
+export default {
   data() {
     return {
       message: '',
@@ -21,7 +20,7 @@ export default defineComponent({
     GithubCorners,
     MarkdownPreview,
   },
-});
+};
 </script>
 <style scoped>
 .example {
