@@ -143,7 +143,7 @@ You can also change the things that come from markdown:
 ```vue
 <template>
   <markdown-preview :components="components">
-    {{`<em>www</em>`}}
+    {{`<em>www  \nxxx</em>\n- 1\n- 2`}}
   </markdown-preview>
 </template>
 
@@ -155,7 +155,13 @@ export default {
   data() {
     return {
       components: {
-        em: ({ properties }) => <i style={{ color: 'red' }} {...properties}>ww</i>,
+        em: ({ children, ...properties}) => {
+          return <i style={{ color: 'red' }} {...properties}>{children}</i>
+        },
+        li: ({ node, checked, index, ordered, children, ...properties}) => {
+          console.log('other:', node, properties, children, checked, index, ordered)
+          return <li {...properties}>{children}</li>
+        },
       }
     }
   },
@@ -165,6 +171,36 @@ export default {
 };
 </script>
 ```
+
+The keys in components are HTML equivalents for the things you write with markdown (such as `h1` for `# heading`). Normally, in markdown, those are: `a`, `blockquote`, `br`, `code`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `img`, `li`, `ol`, `p`, `pre`, `strong`, and `ul`. With [remark-gfm](https://github.com/remarkjs/remark-gfm), you can also use: `del`, `input`, `table`, `tbody`, `td`, `th`, `thead`, and `tr`. Other remark or rehype plugins that add support for new constructs will also work with `vue-markdown-preview`.
+
+The props that are passed are what you probably would expect: an a (link) will get href (and title) props, and img (image) an src (and title), etc. There are some extra props passed.
+
+- `code`
+  - `inline` (`boolean?`) — set to true for inline code
+  - `className` (string?) — set to language-js or so when using `\```js`
+- `h1`, `h2`, `h3`, `h4`, `h5`, `h6`
+  - `level` (`number` between 1 and 6) — heading rank
+- `input` (when using [remark-gfm](https://github.com/remarkjs/remark-gfm))
+  - `checked` (`boolean`) — whether the item is checked
+  - `disabled` (`true`)
+  - `type` (`'checkbox'`)
+- `li`
+  - `index` (`number`) — number of preceding items (so first gets `0`, etc.)
+  - `ordered` (`boolean`) — whether the parent is an ol or not
+  - `checked` (`boolean`?) — null normally, boolean when using [remark-gfm](https://github.com/remarkjs/remark-gfm)’s tasklists
+  - `className` (`string`?) — set to task-list-item when using [remark-gfm](https://github.com/remarkjs/remark-gfm) and the item1 is a tasklist
+- `ol`, `ul`
+  - `depth` (`number`) — number of ancestral lists (so first gets `0`, etc.)
+  - `ordered` (`boolean`) — whether it’s an ol or not
+  - `className` (`string?`) — set to contains-task-list when using [remark-gfm](https://github.com/remarkjs/remark-gfm) and the list contains one or more tasklists
+- `td`, `th` (when using [remark-gfm](https://github.com/remarkjs/remark-gfm))
+  - `style` (`Object?`) — something like `{textAlign: 'left'}` depending on how the cell is aligned
+  - `isHeader` (`boolean`) — whether it’s a th or not
+- `tr` (when using [remark-gfm](https://github.com/remarkjs/remark-gfm))
+  - `isHeader` (`boolean`) — whether it’s in the thead or not
+
+Every component will receive a node (Object). This is the original [`hast`](https://github.com/syntax-tree/hast) element being turned into a Vue element.
 
 ## API
 

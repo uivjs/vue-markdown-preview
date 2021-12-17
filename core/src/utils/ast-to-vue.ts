@@ -1,4 +1,4 @@
-import { VNodeChild, h, Fragment, isVNode } from 'vue';
+import { VNodeChild, h, Fragment, isVNode, VNode } from 'vue';
 import { Element, DocType, Comment, Root, Text, Properties } from 'hast';
 import { Position } from 'unist';
 import { whitespace } from 'hast-util-whitespace';
@@ -8,7 +8,7 @@ import { stringify as commas } from 'comma-separated-tokens';
 import style from 'style-to-object';
 import { MarkdownPreviewProps } from '../';
 
-export type Components = Record<string, (node: Properties | { node: Element }) => VNodeChild>;
+export type Components = Record<string, (node: Properties | { node: Element; children?: VNode }) => VNodeChild>;
 export type Raw = {
   type: 'raw';
   value: string;
@@ -176,7 +176,11 @@ export function toVue(options: Options, node: Element, childIndex: number, paren
     properties.node = node;
   }
   if (typeof component === 'function') {
-    const cnode: Properties | { node: Element } = { node, ...properties };
+    const cnode: Properties | { node: Element; children?: VNode } = {
+      node,
+      children: children ? h(Fragment, children) : undefined,
+      ...properties,
+    };
     const vnode = component(cnode);
     if (vnode && isVNode(vnode)) {
       return vnode;
@@ -185,8 +189,6 @@ export function toVue(options: Options, node: Element, childIndex: number, paren
   if (typeof component === 'string') {
     return children.length > 0 ? h(component, properties, children) : h(component, properties);
   }
-  // return component()
-  console.log(component);
 }
 
 function getInputElement(node: Element | Root): Element | null {
