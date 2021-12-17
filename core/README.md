@@ -10,10 +10,10 @@ Markdown component for Vue. The minimal amount of CSS to replicate the GitHub Ma
 
 ## Feature
 
-- ⛑ [safe](Security) by default (no `v-html`/`innerHTML` or XSS attacks)
-- ♻️ [components](#components) (pass your own component to use instead of `<h2>` for `## hi`)
-- 🧩 [plugins](#plugins) (many plugins you can pick and choose from)
-- ☘️[compliant](#components) (100% to CommonMark, 100% to GFM with a plugin)
+- ⛑ [Safe](Security) by default (no `v-html`/`innerHTML` or XSS attacks)
+- ♻️ [Components](#components) (pass your own component to use instead of `<h2>` for `## hi`)
+- 🧩  [Plugins](#plugins) (many plugins you can pick and choose from)
+- ☘️ [Compliant](#components) (100% to CommonMark, 100% to GFM with a plugin)
 
 ## Install
 
