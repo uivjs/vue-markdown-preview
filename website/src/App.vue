@@ -1,5 +1,6 @@
 <template>
   <div>
+    <github-corners fixed target="__blank" href="https://github.com/uivjs/vue-markdown-preview" />
     <header>
       <img alt="Vue logo" src="./assets/logo.png" />
       <a href="https://github.com/uivjs/vue-markdown-preview" target="__blank">Vue Markdown Preview</a>
@@ -13,6 +14,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
+import GithubCorners from '@uivjs/vue-github-corners';
 import MarkdownPreview from '@uivjs/vue-markdown-preview';
 import '@uivjs/vue-markdown-preview/markdown.css';
 import str from '@uivjs/vue-markdown-preview/README.md';
@@ -29,6 +31,7 @@ export default defineComponent({
   },
   components: {
     'example-base': ExampleBase,
+    GithubCorners,
     MarkdownPreview,
   },
 });
@@ -68,8 +71,8 @@ header p {
 
 .markdown {
   margin: 0 auto;
-  max-width: 820px;
-  padding: 16px;
+  max-width: 680px;
+  padding: 23px;
   border-radius: 5px;
   margin-bottom: 110px;
 }

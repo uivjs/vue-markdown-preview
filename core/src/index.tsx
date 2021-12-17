@@ -14,7 +14,8 @@ import { ElementContent, Root, Element } from 'hast';
 import { VFile } from 'vfile';
 import { octiconLink } from './nodes/octiconLink';
 import { copyElement } from './nodes/copyElement';
-import { childrenToVue, Components } from './utils/ast-to-vue';
+import { childrenToVue, Components, Options } from './utils/ast-to-vue';
+import { uriTransformer } from './utils/uri-transformer';
 
 const markdownPreview = {
   rehypePlugins: {
@@ -32,6 +33,10 @@ const markdownPreview = {
   source: {
     type: String,
     default: '',
+  },
+  transformLinkUri: {
+    type: Function as PropType<Options['transformLinkUri']>,
+    default: uriTransformer,
   },
 };
 
@@ -103,7 +108,14 @@ export default defineComponent({
       if (hastNode.type !== 'root') {
         throw new TypeError('Expected a `root` node');
       }
-      let result = h(Fragment, {}, childrenToVue(hastNode.children, { components: props.components }));
+      let result = h(
+        Fragment,
+        {},
+        childrenToVue(hastNode.children, {
+          components: props.components,
+          transformLinkUri: props.transformLinkUri,
+        }),
+      );
       return <div class="markdown-body">{result}</div>;
     };
   },

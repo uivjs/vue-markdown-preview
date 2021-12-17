@@ -159,6 +159,14 @@ export default {
 </script>
 ```
 
+## API
+
+- `source` (`string`, default: `''`) Markdown to parse.
+- `components` (`Object.<string, VNodeChild>`, default: `{}`) Object mapping tag names to [`Vue`](https://vuejs.org) components.
+- `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
+- `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
+- `transformLinkUri` (`(href, children, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on links, pass null to allow all URLs, see [security](#security)
+
 ## Plugins
 
 We use [unified](https://github.com/unifiedjs/unified), specifically [remark](https://github.com/remarkjs/remark) for markdown and [rehype](https://github.com/rehypejs/rehype) for HTML, which are tools to transform content with plugins. Here are three good ways to find plugins:
@@ -175,16 +183,10 @@ We use [`micromark`](https://github.com/micromark/micromark) under the hood for 
 
 ## Security
 
-Use of `vue-markdown-preview` is secure by default. Furthermore, the `remarkPlugins`, `rehypePlugins`, and components you use may be insecure.
+Use of `vue-markdown-preview` is secure by default. Overwriting `transformLinkUri` to something insecure will open you up to XSS vectors. Furthermore, the `remarkPlugins`, `rehypePlugins`, and components you use may be insecure.
 
 To make sure the content is completely safe, even after what plugins do, use [`rehype-sanitize`](https://github.com/rehypejs/rehype-sanitize). It lets you define your own schema of what is and isn’t allowed.
 
-## API
-
-- `source` (`string`, default: `''`) Markdown to parse.
-- `components` (`Object.<string, VNodeChild>`, default: `{}`) Object mapping tag names to [`Vue`](https://vuejs.org) components.
-- `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
-- `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
 
 ## Development
 
