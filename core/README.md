@@ -178,8 +178,8 @@ export default {
 - `rawSourcePos` (`boolean`, default: `false`)
 pass a prop to all components with their [`position`](https://github.com/syntax-tree/unist#position) (`sourcePosition: {start: {line: 3, column: 1}, end:…}`)
 - `includeElementIndex` (`boolean`, default: `false`) pass the index (number of elements before it) and `siblingCount` (number of elements in parent) as props to all components
-- `transformLinkUri` (`(href, children, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on links, pass null to allow all URLs, see [security](#security).
-- `transformImageUri` (`(src, alt, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on images, pass null to allow all URLs, see [security](#security)
+- `transformLinkUri` (`(href, children, title) => string`, default: [`uriTransformer`](https://github.com/uivjs/vue-markdown-preview/blob/main/core/src/utils/uri-transformer.ts), optional) change URLs on links, pass null to allow all URLs, see [security](#security).
+- `transformImageUri` (`(src, alt, title) => string`, default: [`uriTransformer`](https://github.com/uivjs/vue-markdown-preview/blob/main/core/src/utils/uri-transformer.ts), optional) change URLs on images, pass null to allow all URLs, see [security](#security)
 
 ## Plugins
 
