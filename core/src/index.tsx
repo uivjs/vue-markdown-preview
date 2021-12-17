@@ -10,13 +10,15 @@ import rehypeRewrite from 'rehype-rewrite';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-import { ElementContent, Root, Element } from 'hast';
+import { ElementContent, Root, Element, RootContent } from 'hast';
 import { VFile } from 'vfile';
+import { html } from 'property-information';
 import { octiconLink } from './nodes/octiconLink';
 import { copyElement } from './nodes/copyElement';
-import { childrenToVue, Components, Options } from './utils/ast-to-vue';
+import { childrenToVue, Components } from './utils/ast-to-vue';
 import { uriTransformer } from './utils/uri-transformer';
 
+export type MaybeFunction<T> = T;
 const markdownPreview = {
   rehypePlugins: {
     type: Object as PropType<PluggableList>,
@@ -34,8 +36,31 @@ const markdownPreview = {
     type: String,
     default: '',
   },
+  sourcePos: {
+    type: Boolean,
+    default: false,
+  },
+  rawSourcePos: {
+    type: Boolean,
+    default: false,
+  },
+  includeElementIndex: {
+    type: Boolean,
+    default: false,
+  },
+  skipHtml: {
+    type: Boolean,
+    default: false,
+  },
+  linkTarget: {
+    type: [Function, String] as PropType<(href: string, children: ElementContent[], title: string | null) => string>,
+  },
   transformLinkUri: {
-    type: Function as PropType<Options['transformLinkUri']>,
+    type: Function as PropType<(href: string, children: RootContent[], title?: string | null) => string>,
+    default: uriTransformer,
+  },
+  transformImageUri: {
+    type: Function as PropType<(src: string, alt: string, title: string | null) => string>,
     default: uriTransformer,
   },
 };
@@ -111,9 +136,17 @@ export default defineComponent({
       let result = h(
         Fragment,
         {},
-        childrenToVue(hastNode.children, {
+        childrenToVue(hastNode, {
+          listDepth: 0,
+          schema: html,
           components: props.components,
+          sourcePos: props.sourcePos,
+          rawSourcePos: props.rawSourcePos,
+          includeElementIndex: props.includeElementIndex,
+          skipHtml: props.skipHtml,
+          linkTarget: props.linkTarget,
           transformLinkUri: props.transformLinkUri,
+          transformImageUri: props.transformImageUri,
         }),
       );
       return <div class="markdown-body">{result}</div>;

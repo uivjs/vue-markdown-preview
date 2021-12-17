@@ -163,9 +163,16 @@ export default {
 
 - `source` (`string`, default: `''`) Markdown to parse.
 - `components` (`Object.<string, VNodeChild>`, default: `{}`) Object mapping tag names to [`Vue`](https://vuejs.org) components.
-- `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
-- `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options
-- `transformLinkUri` (`(href, children, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on links, pass null to allow all URLs, see [security](#security)
+- `remarkPlugins` (`Array.<Plugin>`, default: `[]`) List of [remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options.
+- `rehypePlugins` (`Array.<Plugin>`, default: `[]`) List of [rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) to use. See the next section for examples on how to pass options.
+- `skipHtml` (`boolean`, default: `false`) ignore HTML in markdown completely.
+- `linkTarget` (`string` or `(href, children, title) => string`, optional) target to use on links (such as `_blank` for `<a target="_blank"…`)
+- `sourcePos` (`boolean`, default: `false`) pass a prop to all components with a serialized position (`data-sourcepos="3:1-3:13"`)
+- `rawSourcePos` (`boolean`, default: `false`)
+pass a prop to all components with their [`position`](https://github.com/syntax-tree/unist#position) (`sourcePosition: {start: {line: 3, column: 1}, end:…}`)
+- `includeElementIndex` (`boolean`, default: `false`) pass the index (number of elements before it) and `siblingCount` (number of elements in parent) as props to all components
+- `transformLinkUri` (`(href, children, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on links, pass null to allow all URLs, see [security](#security).
+- `transformImageUri` (`(src, alt, title) => string`, default: [`uriTransformer`](./src/utils/uri-transformer.ts), optional) change URLs on images, pass null to allow all URLs, see [security](#security)
 
 ## Plugins
 
@@ -183,7 +190,7 @@ We use [`micromark`](https://github.com/micromark/micromark) under the hood for 
 
 ## Security
 
-Use of `vue-markdown-preview` is secure by default. Overwriting `transformLinkUri` to something insecure will open you up to XSS vectors. Furthermore, the `remarkPlugins`, `rehypePlugins`, and components you use may be insecure.
+Use of `vue-markdown-preview` is secure by default. Overwriting `transformLinkUri` or `transformImageUri` to something insecure will open you up to XSS vectors. Furthermore, the `remarkPlugins`, `rehypePlugins`, and components you use may be insecure.
 
 To make sure the content is completely safe, even after what plugins do, use [`rehype-sanitize`](https://github.com/rehypejs/rehype-sanitize). It lets you define your own schema of what is and isn’t allowed.
 
@@ -206,6 +213,7 @@ npm run start     # development mode, listen to compile preview website instance
 ## Related
 
 - [react-markdown-preview](https://github.com/uiwjs/react-markdown-preview) React component preview markdown text in web browser. 
+- [react-markdown](https://www.npmjs.com/package/react-markdown) Markdown component for React.
 
 ## License
 
