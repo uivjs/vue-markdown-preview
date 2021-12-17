@@ -8,6 +8,13 @@
 
 Markdown component for Vue. The minimal amount of CSS to replicate the GitHub Markdown style. The current document website is converted using this Vue component.
 
+## Feature
+
+- ⛑ [safe](Security) by default (no `v-html`/`innerHTML` or XSS attacks)
+- ♻️ [components](#components) (pass your own component to use instead of `<h2>` for `## hi`)
+- 🧩 [plugins](#plugins) (many plugins you can pick and choose from)
+- ☘️[compliant](#components) (100% to CommonMark, 100% to GFM with a plugin)
+
 ## Install
 
 ```bash
@@ -187,6 +194,10 @@ We use [unified](https://github.com/unifiedjs/unified), specifically [remark](ht
 `vue-markdown-preview` follows CommonMark, which standardizes the differences between markdown implementations, by default. Some syntax extensions are supported through plugins.
 
 We use [`micromark`](https://github.com/micromark/micromark) under the hood for our parsing. See its documentation for more information on markdown, CommonMark, and extensions.
+
+## Types
+
+This package is fully typed with [TypeScript](https://www.typescriptlang.org/). It exports Options and Components types, which specify the interface of the accepted props and components.
 
 ## Security
 
