@@ -1,7 +1,6 @@
 import { defineComponent, h, PropType, ExtractPropTypes, Fragment, Text, VNode } from 'vue';
 import { unified, PluggableList } from 'unified';
-// @ts-ignore
-import rehypePrism from '@mapbox/rehype-prism';
+import rehypePrism from 'rehype-prism-plus';
 import rehypeAttrs from 'rehype-attr';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -17,6 +16,7 @@ import { octiconLink } from './nodes/octiconLink';
 import { copyElement } from './nodes/copyElement';
 import { childrenToVue, Components } from './utils/ast-to-vue';
 import { uriTransformer } from './utils/uri-transformer';
+import aliasLanguage from './plugins/aliasLanguage';
 
 export type MaybeFunction<T> = T;
 const markdownPreview = {
@@ -92,9 +92,10 @@ export default defineComponent({
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeAttrs, { properties: 'attr' })
         .use(rehypeRaw)
+        .use(aliasLanguage)
         .use(rehypeSlug)
         .use(rehypeAutolinkHeadings)
-        .use(rehypePrism, { ignoreMissing: true, alias: { markup: ['vue', 'html'] } })
+        .use(rehypePrism, { ignoreMissing: true })
         .use(rehypeRewrite, {
           rewrite: (node) => {
             if (
