@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@uivjs/vue-github-corners": "~0.0.2",
-    "@uivjs/vue-markdown-preview": "1.0.3",
+    "@uivjs/vue-markdown-preview": "1.0.4",
     "vue": "^3.3.4"
   },
   "devDependencies": {
