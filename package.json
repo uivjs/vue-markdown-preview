@@ -4,6 +4,7 @@
   "scripts": {
     "start": "lerna exec \"npm run dev\" --scope website",
     "doc": "lerna exec \"npm run build\" --scope website",
+    "preview": "lerna exec \"npm run preview\" --scope website",
     "build": "lerna exec \"tsbb build \"src/*.{tsx,ts}\" --use-babel --use-vue\" --scope @uivjs/*",
     "watch": "lerna exec \"tsbb watch \"src/*.{tsx,ts}\" --use-babel --use-vue\" --scope @uivjs/vue-markdown-preview",
     "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
