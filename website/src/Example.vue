@@ -7,6 +7,7 @@
 
 <script>
 import MarkdownPreview from '@uivjs/vue-markdown-preview';
+import '@uivjs/vue-markdown-preview/markdown.css';
 
 export default {
   data() {

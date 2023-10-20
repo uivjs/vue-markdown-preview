@@ -1,26 +1,10 @@
-<template>
-  <div>
-    <github-corners fixed target="__blank" href="https://github.com/uivjs/vue-markdown-preview" />
-    <header>
-      <img alt="Vue logo" src="./assets/logo.png" />
-      <a href="https://github.com/uivjs/vue-markdown-preview" target="__blank">Vue Markdown Preview</a>
-      <p>{{ description }}</p>
-    </header>
-    <example-base></example-base>
-    <markdown-preview class="markdown">
-      {{ markdown }}
-    </markdown-preview>
-  </div>
-</template>
 <script>
 import { defineComponent } from 'vue';
-import GithubCorners from '@uivjs/vue-github-corners';
-import MarkdownPreview from '@uivjs/vue-markdown-preview';
-import '@uivjs/vue-markdown-preview/markdown.css';
 import str from '@uivjs/vue-markdown-preview/README.md';
 import pkg from '@uivjs/vue-markdown-preview/package.json';
+import GithubCorners from '@uivjs/vue-github-corners';
+import MarkdownPreview from '@uivjs/vue-markdown-preview';
 import ExampleBase from './Example.vue';
-import './App.css';
 
 export default defineComponent({
   data() {
@@ -36,6 +20,24 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <div>
+    <github-corners fixed target="__blank" href="https://github.com/uivjs/vue-markdown-preview" />
+    <header>
+      <div>
+        <img src="./assets/vue.svg" alt="Vue Markdown Preview" />
+      </div>
+      <a href="https://github.com/uivjs/vue-markdown-preview" target="__blank">Vue Markdown Preview</a>
+      <p>{{ description }}</p>
+    </header>
+    <example-base></example-base>
+    <markdown-preview class="markdown">
+      {{ markdown }}
+    </markdown-preview>
+  </div>
+</template>
+
 <style scoped>
 header {
   text-align: center;

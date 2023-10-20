@@ -2,24 +2,28 @@
   "name": "vue-markdown-preview",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
-    "start": "lerna exec \"npm run serve\" --scope website",
-    "build:website": "lerna exec \"npm run build\" --scope website",
-    "build": "lerna exec \"tsbb build --use-vue\" --scope @uivjs/*",
-    "watch": "lerna exec \"tsbb watch --use-vue\" --scope @uivjs/vue-markdown-preview",
+    "start": "lerna exec \"npm run dev\" --scope website",
+    "doc": "lerna exec \"npm run build\" --scope website",
+    "build": "lerna exec \"tsbb build \"src/*.{tsx,ts}\" --use-babel --use-vue\" --scope @uivjs/*",
+    "watch": "lerna exec \"tsbb watch \"src/*.{tsx,ts}\" --use-babel --use-vue\" --scope @uivjs/vue-markdown-preview",
     "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
-    "clean": "lerna clean --yes",
-    "hoist": "lerna bootstrap --hoist",
-    "bootstrap": "lerna bootstrap --force-local --no-ci"
+    "clean": "lerna clean --yes"
   },
   "author": "jaywcjlove",
   "license": "MIT",
+  "workspaces": [
+    "core",
+    "website"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "devDependencies": {
-    "husky": "7.0.4",
-    "prettier": "2.4.1",
-    "pretty-quick": "3.1.2",
-    "lerna": "4.0.0",
-    "tsbb": "^3.5.0"
+    "husky": "^8.0.3",
+    "lerna": "^7.4.1",
+    "lint-staged": "^15.0.2",
+    "prettier": "^3.0.3",
+    "tsbb": "^4.2.3"
   }
 }

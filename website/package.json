@@ -2,47 +2,24 @@
   "name": "website",
   "version": "1.0.3",
   "private": true,
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "@uivjs/vue-github-corners": "~0.0.2",
     "@uivjs/vue-markdown-preview": "1.0.3",
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@uivjs/vue-github-corners": "~0.0.2",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0",
-    "raw-loader": "4.0.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {
-      "no-debugger": "off"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@vitejs/plugin-vue": "^4.2.3",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-md": "^0.22.5",
+    "vite-raw-plugin": "^1.0.2",
+    "vue-tsc": "^1.8.5"
+  }
 }
