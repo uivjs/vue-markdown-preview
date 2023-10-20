@@ -83,12 +83,11 @@ export default defineComponent({
   name: 'MarkdownPreview',
   props: markdownPreview,
   setup(props, { slots }) {
-    const { remarkPlugins, rehypePlugins } = props;
     function processor() {
       return unified()
         .use(remarkParse)
         .use(remarkGfm)
-        .use(remarkPlugins || [])
+        .use(props.remarkPlugins || [])
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeAttrs, { properties: 'attr' })
         .use(rehypeRaw)
@@ -117,7 +116,7 @@ export default defineComponent({
             }
           },
         })
-        .use(rehypePlugins || []);
+        .use(props.rehypePlugins || []);
     }
     return () => {
       const children =
