@@ -9,7 +9,8 @@
     "watch": "lerna exec \"tsbb watch \"src/*.{tsx,ts}\" --use-babel --use-vue\" --scope @uivjs/vue-markdown-preview",
     "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
-    "clean": "lerna clean --yes"
+    "clean": "lerna clean --yes",
+    "prepare": "husky install"
   },
   "author": "jaywcjlove",
   "license": "MIT",
@@ -21,7 +22,7 @@
     "node": ">=16.0.0"
   },
   "devDependencies": {
-    "husky": "^8.0.3",
+    "husky": "~9.0.11",
     "lerna": "^7.4.1",
     "lint-staged": "^15.0.2",
     "prettier": "^3.0.3",
