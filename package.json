@@ -10,7 +10,7 @@
     "prettier": "prettier --write \"**/*.{js,jsx,vue,tsx,ts,less,md,json}\"",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
     "clean": "lerna clean --yes",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "author": "jaywcjlove",
   "license": "MIT",
